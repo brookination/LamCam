@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands, tasks
 import random
 import os
+import sys
 import datetime
 
 if not os.path.exists(os.path.realpath("catImages")):
@@ -11,10 +12,14 @@ if not os.path.exists(os.path.realpath("catImages")):
 TOKEN = ""
 
 try:
-    with open('toyken', 'r') as token:
-        TOKEN = token.read()
+    with open('toyken', 'r') as tokenfile:
+        TOKEN = tokenfile.read()
 except:
-    print("Please make a file named \"toyken\" and put your bot token in it.")
+    with open('toyken', 'x') as tokenfile:
+        tokeninput = input("Put your token into the console: ")
+        tokenfile.write(tokeninput)
+        TOKEN = tokeninput
+        print("Continuing script. If this doesn't work, then you didn't put your token in right.")
 
 
 saved_context = None
